@@ -1,0 +1,93 @@
+
+DEFAULT SINGLE_WORD_PASSWORD_LOGICAL = 548/6614
+[10]  {email_contains_username_logical=1, lowercase_password_logical=TRUE}     => {single_word_password_logical=TRUE} 0.028726943  0.3423423 4.131847
+
+> count(contains_firstname_logical==TRUE)
+      x freq
+1 FALSE 6533
+2  TRUE   81
+WHEN NO DIGITS TEND TO INCLUDE FIRST NAME
+[10] {word_and_digit_logical=0}            => {contains_firstname_logical=1} 0.011793166 0.01255028  1.0247847
+[11] {word_and_multiple_digit_logical=0}   => {contains_firstname_logical=1} 0.011793166 0.01255028  1.0247847
+
+[13] {region_name=California}              => {contains_firstname_logical=1} 0.006803750 0.01217532  0.9941679
+
+WHEN CONTAINS FIRSTNAME OFTEN CONTAINS LASTNAME
+{contains_lastname_logical=0}         => {contains_firstname_logical=1} 0.011490777 0.01161014  0.9480184
+
+
+
+> count(contains_dictionary_logical==TRUE)
+      x freq
+1 FALSE 4012
+2  TRUE 2602
+{contains_dictionary_logical=1}       => {word_and_digit_logical=1} 0.060326580 0.15334358  2.5418909
+
+
+
+ table(text_password_logical)
+text_password_logical
+FALSE  TRUE 
+ 4755  1859 
+> table(contains_dictionary_logical)
+contains_dictionary_logical
+   0    1 
+4012 2602 
+ table(single_word_password_logical)
+single_word_password_logical
+FALSE  TRUE 
+ 6066   548 
+
+V.INTERESTING - FAR LESS PEOPLE IN HAWAII HAVE DICTIONARY WORDS (LOCAL DIALECT OR SOMETHING? 2nd rule backs this up since this is more in line with the norm for text only)
+[6]  {region_name=Hawaii} => {contains_dictionary_logical=0}       0.031750832 0.71186441 1.1735472
+[7]  {region_name=Hawaii} => {text_password_logical=FALSE}         0.033867554 0.75932203 1.0561842
+[8]  {region_name=Hawaii} => {single_word_password_logical=FALSE}  0.043090414 0.96610169 1.0533789
+
+
+
+contains_dictionary_logical
+   0    1 
+4012 2602 
+CALIFORNIA CONTAINS HIGHER NUMBER OF DICTIONARY-CONTAINING PASSWORDS
+{region_name=California}              => {contains_dictionary_logical=1} 0.2258845  0.4042208 1.0274851     2
+
+
+
+
+
+BY YEAR:
+[1]  {last_signin_year=2008} => {single_word_password_logical=TRUE}   0.004687028 0.12863071 1.5524881
+[4]  {last_signin_year=2008} => {lowercase_password_logical=TRUE}     0.015270638 0.41908714 1.6548312
+[5]  {last_signin_year=2008} => {text_password_logical=TRUE}          0.016933777 0.46473029 1.6534299
+
+[1]  {last_signin_year=2009} => {single_word_password_logical=TRUE}   0.00544300 0.1074627  1.2970040
+[3]  {last_signin_year=2009} => {lowercase_password_logical=TRUE}     0.01874811 0.3701493  1.4615923
+[4]  {last_signin_year=2009} => {text_password_logical=TRUE}          0.02010886 0.3970149  1.4125103
+
+[2]  {last_signin_year=2010} => {single_word_password_logical=TRUE}   0.008769277 0.13776722 1.6627599
+[4]  {last_signin_year=2010} => {lowercase_password_logical=TRUE}     0.022225582 0.34916865 1.3787471
+[5]  {last_signin_year=2010} => {text_password_logical=TRUE}          0.024947082 0.39192399 1.3943977
+
+[4]  {last_signin_year=2011} => {single_word_password_logical=TRUE}   0.007257333 0.10457516 1.2621535
+[6]  {last_signin_year=2011} => {lowercase_password_logical=TRUE}     0.022376777 0.32244009 1.2732052
+[7]  {last_signin_year=2011} => {text_password_logical=TRUE}          0.024493499 0.35294118 1.2557036
+
+[3]  {last_signin_year=2012} => {single_word_password_logical=TRUE}   0.005745389 0.07786885 0.9398259
+[5]  {last_signin_year=2012} => {lowercase_password_logical=TRUE}     0.018748110 0.25409836 1.0033472
+[6]  {last_signin_year=2012} => {text_password_logical=TRUE}          0.019655277 0.26639344 0.9477817
+
+[3]  {last_signin_year=2013} => {single_word_password_logical=TRUE}   0.008618083 0.09163987 1.1060330
+[5]  {last_signin_year=2013} => {lowercase_password_logical=TRUE}     0.024191110 0.25723473 1.0157316
+[6]  {last_signin_year=2013} => {text_password_logical=TRUE}          0.027366193 0.29099678 1.0353162
+
+[3]  {last_signin_year=2014} => {single_word_password_logical=TRUE}   0.008466888 0.06021505 0.7267561
+[5]  {last_signin_year=2014} => {lowercase_password_logical=TRUE}     0.029785304 0.21182796 0.8364359
+[6]  {last_signin_year=2014} => {text_password_logical=TRUE}          0.032657998 0.23225806 0.8263340
+
+[4]  {last_signin_year=2015} => {single_word_password_logical=TRUE}   0.008466888 0.05761317 0.6953531
+[5]  {last_signin_year=2015} => {lowercase_password_logical=TRUE}     0.028273360 0.19238683 0.7596696
+[6]  {last_signin_year=2015} => {text_password_logical=TRUE}          0.031146054 0.21193416 0.7540250
+
+[4]  {last_signin_year=2016} => {single_word_password_logical=TRUE}   0.004989416 0.05830389 0.7036896
+[5]  {last_signin_year=2016} => {lowercase_password_logical=TRUE}     0.014968249 0.17491166 0.6906661
+[6]  {last_signin_year=2016} => {text_password_logical=TRUE}          0.016177805 0.18904594 0.6725927
